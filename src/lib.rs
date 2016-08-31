@@ -1,6 +1,7 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-    }
-}
+
+#[macro_use]
+extern crate glib;
+extern crate gudev_sys as ffi;
+
+pub use auto::*;
+mod auto;

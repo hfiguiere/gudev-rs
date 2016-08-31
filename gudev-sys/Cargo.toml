@@ -10,6 +10,9 @@ libc = "0.2"
 
 [features]
 
+[lib]
+name = "gudev_sys"
+
 [package]
 authors = ["Hubert Figuière <hub@figuiere.net>"]
 build = "build.rs"
