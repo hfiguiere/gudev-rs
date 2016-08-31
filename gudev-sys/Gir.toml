@@ -1,0 +1,16 @@
+[options]
+girs_dir = "../gir-files"
+work_mode = "sys"
+library = "GUdev"
+version = "1.0"
+min_cfg_version = "230"
+target_path = "."
+
+external_libraries = [
+   "GLib",
+   "GObject",
+]
+
+ignore = [
+
+]
