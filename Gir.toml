@@ -7,7 +7,9 @@ target_path = "."
 work_mode = "normal"
 
 generate = [
-    "GUdev.Client"
+    "GUdev.Client",
+    "GUdev.Device",
+    "GUdev.DeviceType",
 ]
 
 ignore = [
