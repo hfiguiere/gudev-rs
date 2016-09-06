@@ -4,6 +4,12 @@
 mod client;
 pub use self::client::Client;
 
+mod device;
+pub use self::device::Device;
+
+mod enums;
+pub use self::enums::DeviceType;
+
 #[doc(hidden)]
 pub mod traits {
 }

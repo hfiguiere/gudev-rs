@@ -6,3 +6,37 @@ use glib_ffi;
 use glib::error::ErrorDomain;
 use glib::translate::*;
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
+pub enum DeviceType {
+    None,
+    Block,
+    Char,
+    #[doc(hidden)]
+    __Nonexhaustive(()),
+}
+
+#[doc(hidden)]
+impl ToGlib for DeviceType {
+    type GlibType = ffi::GUdevDeviceType;
+
+    fn to_glib(&self) -> ffi::GUdevDeviceType {
+        match *self {
+            DeviceType::None => ffi::G_UDEV_DEVICE_TYPE_NONE,
+            DeviceType::Block => ffi::G_UDEV_DEVICE_TYPE_BLOCK,
+            DeviceType::Char => ffi::G_UDEV_DEVICE_TYPE_CHAR,
+            DeviceType::__Nonexhaustive(_) => panic!(),
+        }
+    }
+}
+
+#[doc(hidden)]
+impl FromGlib<ffi::GUdevDeviceType> for DeviceType {
+    fn from_glib(value: ffi::GUdevDeviceType) -> Self {
+        match value {
+            ffi::G_UDEV_DEVICE_TYPE_NONE => DeviceType::None,
+            ffi::G_UDEV_DEVICE_TYPE_BLOCK => DeviceType::Block,
+            ffi::G_UDEV_DEVICE_TYPE_CHAR => DeviceType::Char,
+        }
+    }
+}
+
