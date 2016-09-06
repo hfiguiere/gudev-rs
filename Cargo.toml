@@ -4,5 +4,7 @@ version = "0.1.0"
 authors = ["Hubert Figuière <hub@figuiere.net>"]
 
 [dependencies]
+libc = "0.2"
 gudev-sys = { path = "gudev-sys" }
-glib = { git="https://github.com/gtk-rs/glib" }
+glib = { git = "https://github.com/gtk-rs/glib" }
+glib-sys = { git = "https://github.com/gtk-rs/sys" }
