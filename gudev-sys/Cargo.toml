@@ -1,3 +1,15 @@
+[package]
+authors = ["Hubert Figuière <hub@figuiere.net>"]
+build = "build.rs"
+links = "gudev"
+name = "gudev-sys"
+version = "0.1.0"
+description = "Rust ffi interface for gudev, the glib support library for libudev."
+license = "MIT"
+homepage = "https://github.com/hfiguiere/gudev-rs"
+repository = "https://github.com/hfiguiere/gudev-rs"
+
+keywords = ["ffi", "udev", "glib"]
 
 [build-dependencies]
 pkg-config = "0.3.7"
@@ -16,10 +28,3 @@ git = "https://github.com/gtk-rs/sys"
 
 [lib]
 name = "gudev_sys"
-
-[package]
-authors = ["Hubert Figuière <hub@figuiere.net>"]
-build = "build.rs"
-links = "gudev"
-name = "gudev-sys"
-version = "0.1.0"
