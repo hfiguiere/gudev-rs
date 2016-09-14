@@ -19,10 +19,10 @@ bitflags = "0.4"
 libc = "0.2"
 
 [dependencies.glib-sys]
-git = "https://github.com/gtk-rs/sys"
+version="0.3.1"
 
 [dependencies.gobject-sys]
-git = "https://github.com/gtk-rs/sys"
+version="0.3.1"
 
 [features]
 
