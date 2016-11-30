@@ -3,7 +3,7 @@ authors = ["Hubert Figuière <hub@figuiere.net>"]
 build = "build.rs"
 links = "gudev"
 name = "gudev-sys"
-version = "0.1.0"
+version = "0.1.1"
 description = "Rust ffi interface for gudev, the glib support library for libudev."
 license = "MIT"
 homepage = "https://github.com/hfiguiere/gudev-rs"
@@ -19,10 +19,10 @@ bitflags = "0.4"
 libc = "0.2"
 
 [dependencies.glib-sys]
-version="0.3.1"
+version="0.3.2"
 
 [dependencies.gobject-sys]
-version="0.3.1"
+version="0.3.2"
 
 [features]
 
