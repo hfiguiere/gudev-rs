@@ -1,3 +1,8 @@
+0.1.1 - 2016/11/30
+
+- Update crate dependencies to releases.
+- Lower the version requirement on gudev.
+
 0.1.0 - 2016/09/13
 
 - Initial release.
