@@ -10,6 +10,7 @@ generate = [
     "GUdev.Client",
     "GUdev.Device",
     "GUdev.DeviceType",
+    "GUdev.Enumerator"
 ]
 
 ignore = [
