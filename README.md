@@ -16,3 +16,11 @@ cargo build
 ````
 
 
+Contributors
+------------
+
+Maintainer:
+-Hubert Figuière <hub@figuiere.net>
+
+Contributors:
+-Moritz Maxeiner

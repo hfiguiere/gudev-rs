@@ -1,3 +1,7 @@
+0.2.0 -
+
+- Added GUdevEnumerator. Issue #1 (Moritz Maxeiner)
+
 0.1.1 - 2016/11/30
 
 - Update crate dependencies to releases.
