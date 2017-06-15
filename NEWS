@@ -1,4 +1,12 @@
-0.2.0 -
+0.2.2 - 2017/06/14
+
+- Bump dependencies
+
+0.2.1 - 2017/04/16
+
+- Bump dependencies
+
+0.2.0 - 2017/01/03
 
 - Added GUdevEnumerator. Issue #1 (Moritz Maxeiner)
 
