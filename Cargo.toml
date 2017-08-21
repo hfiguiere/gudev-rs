@@ -13,3 +13,4 @@ libc = "0.2"
 gudev-sys = { version="0.2.0", path = "gudev-sys" }
 glib = { version = "0.3.0" }
 glib-sys = { version = "0.4.0" }
+gobject-sys = { version = "0.4.0" }
