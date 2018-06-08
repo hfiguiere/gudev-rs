@@ -6,12 +6,17 @@ bitflags = "0.9"
 libc = "0.2"
 
 [dependencies.glib-sys]
-version = "0.4.0"
+version = "0.6.0"
 
 [dependencies.gobject-sys]
-version = "0.4.0"
+version = "0.6.0"
+
+[dev-dependencies]
+shell-words = "0.1.0"
+tempdir = "0.3"
 
 [features]
+dox = []
 
 [lib]
 name = "gudev_sys"
@@ -26,4 +31,4 @@ license = "MIT"
 links = "gudev"
 name = "gudev-sys"
 repository = "https://github.com/hfiguiere/gudev-rs"
-version = "0.2.0"
+version = "0.3.0"

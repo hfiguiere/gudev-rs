@@ -17,7 +17,7 @@ fn find() -> Result<(), Error> {
     let package_name = "gudev-1.0";
     let shared_libs = ["gudev-1.0"];
     let version = {
-        "175"
+        "230"
     };
 
     if let Ok(lib_dir) = env::var("GTK_LIB_DIR") {
@@ -33,6 +33,7 @@ fn find() -> Result<(), Error> {
 
     let mut config = Config::new();
     config.atleast_version(version);
+    config.print_system_libs(false);
     if hardcode_shared_libs {
         config.cargo_metadata(false);
     }
