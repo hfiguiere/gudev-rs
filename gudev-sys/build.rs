@@ -17,7 +17,7 @@ fn find() -> Result<(), Error> {
     let package_name = "gudev-1.0";
     let shared_libs = ["gudev-1.0"];
     let version = {
-        "230"
+        "204"
     };
 
     if let Ok(lib_dir) = env::var("GTK_LIB_DIR") {
