@@ -1,4 +1,8 @@
-0.5.0 - 2019/09/22
+0.6.0 - 2019/07/05
+
+- Bump dependencies to glib 0.7.0
+
+0.5.0 - 2019/02/22
 
 - Bump dependencies to glib 0.6.0
 
