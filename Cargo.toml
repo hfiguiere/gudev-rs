@@ -1,6 +1,6 @@
 [package]
 name = "gudev"
-version = "0.7.0"
+version = "0.8.0"
 authors = ["Hubert Figuière <hub@figuiere.net>"]
 description = "Rust API for gudev, the glib support library for libudev."
 license = "MIT"
@@ -11,6 +11,6 @@ keywords = ["ffi", "udev", "glib"]
 [dependencies]
 libc = "0.2"
 gudev-sys = { version = "^0.6.0", path = "gudev-sys" }
-glib = { version = "^0.8.0" }
-glib-sys = { version = "^0.9.0" }
-gobject-sys = { version = "^0.9.0" }
+glib = { version = "^0.9.0" }
+glib-sys = { version = "^0.9.1" }
+gobject-sys = { version = "^0.9.1" }

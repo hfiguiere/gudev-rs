@@ -1,3 +1,8 @@
+0.8.0 - 2019/12/24
+
+- Bump dependencies to glib 0.9.0
+- Regenerated bindings
+
 0.6.0 - 2019/07/05
 
 - Bump dependencies to glib 0.7.0
