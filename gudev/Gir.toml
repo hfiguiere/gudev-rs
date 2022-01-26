@@ -1,6 +1,6 @@
 [options]
 girs_directories = [
-    "gir-files"
+    "../gir-files"
 ]
 library = "GUdev"
 version = "1.0"
