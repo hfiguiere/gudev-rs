@@ -11,5 +11,5 @@ edition = "2018"
 
 [dependencies]
 libc = "0.2"
-gudev-sys = { version = "^0.8.0", path = "gudev-sys" }
+ffi = { package = "gudev-sys", version = "^0.8.0", path = "gudev-sys" }
 glib = { version = "^0.15.0" }
