@@ -6,7 +6,7 @@ events in a Gtk application.
 To generate the bindings, do:
 
 ````
-make gir
+python3 generator.py
 ````
 
 Then you can build them with:
