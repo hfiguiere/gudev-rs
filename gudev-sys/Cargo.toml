@@ -7,10 +7,10 @@ bitflags = "1.0"
 libc = "0.2"
 
 [dependencies.glib-sys]
-version = "^0.14.0"
+version = "^0.15.0"
 
 [dependencies.gobject-sys]
-version = "^0.14.0"
+version = "^0.15.0"
 
 [dev-dependencies]
 shell-words = "1.0.0"
