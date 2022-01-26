@@ -19,5 +19,5 @@ ignore = [
 ]
 
 manual = [
-
+    "GUdev.DeviceNumber"
 ]
