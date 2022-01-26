@@ -35,7 +35,7 @@ links = "gudev"
 name = "gudev-sys"
 repository = "https://github.com/hfiguiere/gudev-rs"
 version = "0.8.0"
-edition = "2018"
+edition = "2021"
 [package.metadata.system-deps.gudev_1_0]
 name = "gudev-1.0"
 version = "230"

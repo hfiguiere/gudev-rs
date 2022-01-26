@@ -7,7 +7,7 @@ license = "MIT"
 homepage = "https://github.com/hfiguiere/gudev-rs"
 repository = "https://github.com/hfiguiere/gudev-rs"
 keywords = ["ffi", "udev", "glib"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 libc = "0.2"
