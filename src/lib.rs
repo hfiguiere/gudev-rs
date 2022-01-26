@@ -1,4 +1,6 @@
 pub type DeviceNumber = ffi::GUdevDeviceNumber;
 
-pub use auto::*;
+#[allow(unused_imports)]
 mod auto;
+
+pub use auto::*;
