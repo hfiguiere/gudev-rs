@@ -3,10 +3,10 @@
 // DO NOT EDIT
 
 use gudev_sys::*;
-use std::mem::{align_of, size_of};
 use std::env;
 use std::error::Error;
 use std::ffi::OsString;
+use std::mem::{align_of, size_of};
 use std::path::Path;
 use std::process::Command;
 use std::str;
@@ -64,20 +64,17 @@ fn pkg_config_cflags(packages: &[&str]) -> Result<Vec<String>, Box<dyn Error>> {
     if packages.is_empty() {
         return Ok(Vec::new());
     }
-    let pkg_config = env::var_os("PKG_CONFIG")
-        .unwrap_or_else(|| OsString::from("pkg-config"));
+    let pkg_config = env::var_os("PKG_CONFIG").unwrap_or_else(|| OsString::from("pkg-config"));
     let mut cmd = Command::new(pkg_config);
     cmd.arg("--cflags");
     cmd.args(packages);
     let out = cmd.output()?;
     if !out.status.success() {
-        return Err(format!("command {:?} returned {}",
-                           &cmd, out.status).into());
+        return Err(format!("command {:?} returned {}", &cmd, out.status).into());
     }
     let stdout = str::from_utf8(&out.stdout)?;
     Ok(shell_words::split(stdout.trim())?)
 }
-
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 struct Layout {
@@ -174,8 +171,7 @@ fn cross_validate_layout_with_c() {
 
     let mut results = Results::default();
 
-    for ((rust_name, rust_layout), (c_name, c_layout)) in
-        RUST_LAYOUTS.iter().zip(c_layouts.iter())
+    for ((rust_name, rust_layout), (c_name, c_layout)) in RUST_LAYOUTS.iter().zip(c_layouts.iter())
     {
         if rust_name != c_name {
             results.record_failed();
@@ -216,14 +212,62 @@ fn get_c_output(name: &str) -> Result<String, Box<dyn Error>> {
 }
 
 const RUST_LAYOUTS: &[(&str, Layout)] = &[
-    ("GUdevClient", Layout {size: size_of::<GUdevClient>(), alignment: align_of::<GUdevClient>()}),
-    ("GUdevClientClass", Layout {size: size_of::<GUdevClientClass>(), alignment: align_of::<GUdevClientClass>()}),
-    ("GUdevDevice", Layout {size: size_of::<GUdevDevice>(), alignment: align_of::<GUdevDevice>()}),
-    ("GUdevDeviceClass", Layout {size: size_of::<GUdevDeviceClass>(), alignment: align_of::<GUdevDeviceClass>()}),
-    ("GUdevDeviceNumber", Layout {size: size_of::<GUdevDeviceNumber>(), alignment: align_of::<GUdevDeviceNumber>()}),
-    ("GUdevDeviceType", Layout {size: size_of::<GUdevDeviceType>(), alignment: align_of::<GUdevDeviceType>()}),
-    ("GUdevEnumerator", Layout {size: size_of::<GUdevEnumerator>(), alignment: align_of::<GUdevEnumerator>()}),
-    ("GUdevEnumeratorClass", Layout {size: size_of::<GUdevEnumeratorClass>(), alignment: align_of::<GUdevEnumeratorClass>()}),
+    (
+        "GUdevClient",
+        Layout {
+            size: size_of::<GUdevClient>(),
+            alignment: align_of::<GUdevClient>(),
+        },
+    ),
+    (
+        "GUdevClientClass",
+        Layout {
+            size: size_of::<GUdevClientClass>(),
+            alignment: align_of::<GUdevClientClass>(),
+        },
+    ),
+    (
+        "GUdevDevice",
+        Layout {
+            size: size_of::<GUdevDevice>(),
+            alignment: align_of::<GUdevDevice>(),
+        },
+    ),
+    (
+        "GUdevDeviceClass",
+        Layout {
+            size: size_of::<GUdevDeviceClass>(),
+            alignment: align_of::<GUdevDeviceClass>(),
+        },
+    ),
+    (
+        "GUdevDeviceNumber",
+        Layout {
+            size: size_of::<GUdevDeviceNumber>(),
+            alignment: align_of::<GUdevDeviceNumber>(),
+        },
+    ),
+    (
+        "GUdevDeviceType",
+        Layout {
+            size: size_of::<GUdevDeviceType>(),
+            alignment: align_of::<GUdevDeviceType>(),
+        },
+    ),
+    (
+        "GUdevEnumerator",
+        Layout {
+            size: size_of::<GUdevEnumerator>(),
+            alignment: align_of::<GUdevEnumerator>(),
+        },
+    ),
+    (
+        "GUdevEnumeratorClass",
+        Layout {
+            size: size_of::<GUdevEnumeratorClass>(),
+            alignment: align_of::<GUdevEnumeratorClass>(),
+        },
+    ),
 ];
 
 const RUST_CONSTANTS: &[(&str, &str)] = &[
@@ -231,5 +275,3 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ("(gint) G_UDEV_DEVICE_TYPE_CHAR", "99"),
     ("(gint) G_UDEV_DEVICE_TYPE_NONE", "0"),
 ];
-
-
