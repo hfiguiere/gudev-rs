@@ -9,10 +9,8 @@ target_path = "."
 work_mode = "normal"
 
 generate = [
-    "GUdev.Client",
     "GUdev.Device",
     "GUdev.DeviceType",
-    "GUdev.Enumerator"
 ]
 
 ignore = [
@@ -21,3 +19,13 @@ ignore = [
 manual = [
     "GUdev.DeviceNumber"
 ]
+
+[[object]]
+name = "GUdev.Client"
+status = "generate"
+generate_builder = false
+
+[[object]]
+name = "GUdev.Enumerator"
+status = "generate"
+generate_builder = false
