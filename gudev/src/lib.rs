@@ -1,3 +1,5 @@
+pub use ffi;
+
 pub type DeviceNumber = ffi::GUdevDeviceNumber;
 
 #[allow(unused_imports)]
