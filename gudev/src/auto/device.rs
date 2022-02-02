@@ -79,7 +79,7 @@ pub trait DeviceExt: 'static {
 
     #[doc(alias = "g_udev_device_get_property_as_boolean")]
     #[doc(alias = "get_property_as_boolean")]
-    fn is_property_as_boolean(&self, key: &str) -> bool;
+    fn property_as_boolean(&self, key: &str) -> bool;
 
     #[doc(alias = "g_udev_device_get_property_as_double")]
     #[doc(alias = "get_property_as_double")]
@@ -115,11 +115,11 @@ pub trait DeviceExt: 'static {
 
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_boolean")]
     #[doc(alias = "get_sysfs_attr_as_boolean")]
-    fn is_sysfs_attr_as_boolean(&self, name: &str) -> bool;
+    fn sysfs_attr_as_boolean(&self, name: &str) -> bool;
 
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_boolean_uncached")]
     #[doc(alias = "get_sysfs_attr_as_boolean_uncached")]
-    fn is_sysfs_attr_as_boolean_uncached(&self, name: &str) -> bool;
+    fn sysfs_attr_as_boolean_uncached(&self, name: &str) -> bool;
 
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_double")]
     #[doc(alias = "get_sysfs_attr_as_double")]
@@ -283,7 +283,7 @@ impl<O: IsA<Device>> DeviceExt for O {
         }
     }
 
-    fn is_property_as_boolean(&self, key: &str) -> bool {
+    fn property_as_boolean(&self, key: &str) -> bool {
         unsafe {
             from_glib(ffi::g_udev_device_get_property_as_boolean(
                 self.as_ref().to_glib_none().0,
@@ -357,7 +357,7 @@ impl<O: IsA<Device>> DeviceExt for O {
         }
     }
 
-    fn is_sysfs_attr_as_boolean(&self, name: &str) -> bool {
+    fn sysfs_attr_as_boolean(&self, name: &str) -> bool {
         unsafe {
             from_glib(ffi::g_udev_device_get_sysfs_attr_as_boolean(
                 self.as_ref().to_glib_none().0,
@@ -366,7 +366,7 @@ impl<O: IsA<Device>> DeviceExt for O {
         }
     }
 
-    fn is_sysfs_attr_as_boolean_uncached(&self, name: &str) -> bool {
+    fn sysfs_attr_as_boolean_uncached(&self, name: &str) -> bool {
         unsafe {
             from_glib(ffi::g_udev_device_get_sysfs_attr_as_boolean_uncached(
                 self.as_ref().to_glib_none().0,
