@@ -1,3 +1,12 @@
+0.11.0 - 2022/02/02
+
+- Realign crate to gtk-rs standards (Bilal Elmoussaoui)
+  - Bump dependencies to glib 0.15.0.
+  - Regenerated bindings from updated gir-files. Now using upstream.
+  - Reorganized the crate: `gudev-sys` moved to `gudev/sys`.
+  - Change the method for updating bindings.
+- Added gudev-gir for the gir file hosted locally.
+
 0.10.0 - 2021/06/23
 
 - Bump dependencies to glib 0.14.0

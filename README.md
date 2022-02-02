@@ -23,4 +23,5 @@ Maintainer:
 -Hubert Figuière <hub@figuiere.net>
 
 Contributors:
+-Bilal Elmoussaoui
 -Moritz Maxeiner
