@@ -1,5 +1,8 @@
 [options]
-girs_directories = [ "../../gir-files" ]
+girs_directories = [
+    "../../gir-files",
+    "../../gudev-gir"
+]
 work_mode = "sys"
 library = "GUdev"
 version = "1.0"
