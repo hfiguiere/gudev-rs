@@ -20,8 +20,10 @@ Contributors
 ------------
 
 Maintainer:
--Hubert Figuière <hub@figuiere.net>
+
+- Hubert Figuière <hub@figuiere.net>
 
 Contributors:
--Bilal Elmoussaoui
--Moritz Maxeiner
+
+- Bilal Elmoussaoui
+- Moritz Maxeiner
