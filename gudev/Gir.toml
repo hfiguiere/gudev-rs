@@ -10,7 +10,6 @@ target_path = "."
 work_mode = "normal"
 
 generate = [
-    "GUdev.Device",
     "GUdev.DeviceType",
 ]
 
@@ -25,6 +24,19 @@ manual = [
 name = "GUdev.Client"
 status = "generate"
 generate_builder = false
+
+[[object]]
+name = "GUdev.Device"
+status = "generate"
+    [[object.function]]
+    name = "get_sysfs_attr_as_boolean_uncached"
+    rename = "sysfs_attr_as_boolean_uncached"
+    [[object.function]]
+    name = "get_sysfs_attr_as_boolean"
+    rename = "sysfs_attr_as_boolean"
+    [[object.function]]
+    name = "get_property_as_boolean"
+    rename = "property_as_boolean"
 
 [[object]]
 name = "GUdev.Enumerator"
