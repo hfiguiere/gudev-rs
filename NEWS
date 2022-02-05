@@ -1,3 +1,8 @@
+0.12.0 - 2022/02/04
+
+- Export `ffi` and `prelude` (Bilal Elmoussaoui).
+- Properly rename property accessors (Bilal Elmoussaoui).
+
 0.11.0 - 2022/02/02
 
 - Realign crate to gtk-rs standards (Bilal Elmoussaoui)
