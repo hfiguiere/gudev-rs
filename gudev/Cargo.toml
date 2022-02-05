@@ -1,6 +1,6 @@
 [package]
 name = "gudev"
-version = "0.11.0"
+version = "0.12.0"
 authors = ["Hubert Figuière <hub@figuiere.net>"]
 description = "Rust API for gudev, the glib support library for libudev."
 license = "MIT"
