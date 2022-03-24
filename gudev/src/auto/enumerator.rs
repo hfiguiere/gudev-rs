@@ -11,6 +11,11 @@ use glib::StaticType;
 use std::fmt;
 
 glib::wrapper! {
+    /// [`Enumerator`][crate::Enumerator] is used to lookup and sort devices.
+    ///
+    /// # Implements
+    ///
+    /// [`EnumeratorExt`][trait@crate::prelude::EnumeratorExt]
     #[doc(alias = "GUdevEnumerator")]
     pub struct Enumerator(Object<ffi::GUdevEnumerator, ffi::GUdevEnumeratorClass>);
 
@@ -22,52 +27,140 @@ glib::wrapper! {
 impl Enumerator {
     pub const NONE: Option<&'static Enumerator> = None;
 
+    /// Constructs a [`Enumerator`][crate::Enumerator] object that can be used to enumerate
+    /// and sort devices. Use the add_match_*() and add_nomatch_*() methods
+    /// and execute the query to get a list of devices with
+    /// [`EnumeratorExt::execute()`][crate::prelude::EnumeratorExt::execute()].
+    /// ## `client`
+    /// A [`Client`][crate::Client] to enumerate devices from.
+    ///
+    /// # Returns
+    ///
+    /// A new [`Enumerator`][crate::Enumerator] object. Free with `g_object_unref()`.
     #[doc(alias = "g_udev_enumerator_new")]
     pub fn new(client: &impl IsA<Client>) -> Enumerator {
         unsafe { from_glib_full(ffi::g_udev_enumerator_new(client.as_ref().to_glib_none().0)) }
     }
 }
 
+/// Trait containing all [`struct@Enumerator`] methods.
+///
+/// # Implementors
+///
+/// [`Enumerator`][struct@crate::Enumerator]
 pub trait EnumeratorExt: 'static {
+    /// All returned devices will be initialized.
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_match_is_initialized")]
     #[must_use]
     fn add_match_is_initialized(&self) -> Option<Enumerator>;
 
+    /// All returned devices will match the given `name`.
+    /// ## `name`
+    /// Wildcard filter for kernel name e.g. "sda*".
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_match_name")]
     #[must_use]
     fn add_match_name(&self, name: &str) -> Option<Enumerator>;
 
+    /// All returned devices will have a property matching the given `name` and `value`.
+    /// ## `name`
+    /// Wildcard filter for property name.
+    /// ## `value`
+    /// Wildcard filter for property value.
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_match_property")]
     #[must_use]
     fn add_match_property(&self, name: &str, value: &str) -> Option<Enumerator>;
 
+    /// All returned devices will match the given `subsystem`.
+    /// ## `subsystem`
+    /// Wildcard for subsystem name e.g. 'scsi' or 'a*'.
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_match_subsystem")]
     #[must_use]
     fn add_match_subsystem(&self, subsystem: &str) -> Option<Enumerator>;
 
+    /// All returned devices will have a sysfs attribute matching the given `name` and `value`.
+    /// ## `name`
+    /// Wildcard filter for sysfs attribute key.
+    /// ## `value`
+    /// Wildcard filter for sysfs attribute value.
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_match_sysfs_attr")]
     #[must_use]
     fn add_match_sysfs_attr(&self, name: &str, value: &str) -> Option<Enumerator>;
 
+    /// All returned devices will match the given `tag`.
+    /// ## `tag`
+    /// A udev tag e.g. "udev-acl".
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_match_tag")]
     #[must_use]
     fn add_match_tag(&self, tag: &str) -> Option<Enumerator>;
 
+    /// All returned devices will not match the given `subsystem`.
+    /// ## `subsystem`
+    /// Wildcard for subsystem name e.g. 'scsi' or 'a*'.
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_nomatch_subsystem")]
     #[must_use]
     fn add_nomatch_subsystem(&self, subsystem: &str) -> Option<Enumerator>;
 
+    /// All returned devices will not have a sysfs attribute matching the given `name` and `value`.
+    /// ## `name`
+    /// Wildcard filter for sysfs attribute key.
+    /// ## `value`
+    /// Wildcard filter for sysfs attribute value.
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_nomatch_sysfs_attr")]
     #[must_use]
     fn add_nomatch_sysfs_attr(&self, name: &str, value: &str) -> Option<Enumerator>;
 
+    /// Add a device to the list of devices, to retrieve it back sorted in dependency order.
+    /// ## `sysfs_path`
+    /// A sysfs path, e.g. "/sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0/0:0:0:0/block/sda"
+    ///
+    /// # Returns
+    ///
+    /// The passed in `self`.
     #[doc(alias = "g_udev_enumerator_add_sysfs_path")]
     #[must_use]
     fn add_sysfs_path(&self, sysfs_path: &str) -> Option<Enumerator>;
 
+    /// Executes the query in `self`.
+    ///
+    /// # Returns
+    ///
+    /// A list of [`Device`][crate::Device] objects. The caller should free the result by using `g_object_unref()` on each element in the list and then `g_list_free()` on the list.
     #[doc(alias = "g_udev_enumerator_execute")]
     fn execute(&self) -> Vec<Device>;
 
+    /// The [`Client`][crate::Client] to enumerate devices from.
     fn client(&self) -> Option<Client>;
 }
 

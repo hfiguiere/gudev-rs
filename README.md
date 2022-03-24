@@ -6,7 +6,7 @@ events in a Gtk application.
 To generate the bindings, do:
 
 ````
-python3 generator.py
+python3 generator.py --embed-docs
 ````
 
 Then you can build them with:
