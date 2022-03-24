@@ -10,14 +10,18 @@ use glib::StaticType;
 use glib::Type;
 use std::fmt;
 
+/// Enumeration used to specify a the type of a device.
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
 #[non_exhaustive]
 #[doc(alias = "GUdevDeviceType")]
 pub enum DeviceType {
+    /// Device does not have a device file.
     #[doc(alias = "G_UDEV_DEVICE_TYPE_NONE")]
     None,
+    /// Device is a block device.
     #[doc(alias = "G_UDEV_DEVICE_TYPE_BLOCK")]
     Block,
+    /// Device is a character device.
     #[doc(alias = "G_UDEV_DEVICE_TYPE_CHAR")]
     Char,
     #[doc(hidden)]

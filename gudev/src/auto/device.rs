@@ -10,6 +10,56 @@ use glib::translate::*;
 use std::fmt;
 
 glib::wrapper! {
+    /// The [`Device`][crate::Device] class is used to get information about a specific
+    /// device. Note that you cannot instantiate a [`Device`][crate::Device] object
+    /// yourself. Instead you must use [`Client`][crate::Client] to obtain [`Device`][crate::Device]
+    /// objects.
+    ///
+    /// To get basic information about a device, use
+    /// [`DeviceExt::subsystem()`][crate::prelude::DeviceExt::subsystem()], [`DeviceExt::devtype()`][crate::prelude::DeviceExt::devtype()],
+    /// [`DeviceExt::name()`][crate::prelude::DeviceExt::name()], [`DeviceExt::number()`][crate::prelude::DeviceExt::number()],
+    /// [`DeviceExt::sysfs_path()`][crate::prelude::DeviceExt::sysfs_path()], [`DeviceExt::driver()`][crate::prelude::DeviceExt::driver()],
+    /// [`DeviceExt::action()`][crate::prelude::DeviceExt::action()], [`DeviceExt::seqnum()`][crate::prelude::DeviceExt::seqnum()],
+    /// [`DeviceExt::device_type()`][crate::prelude::DeviceExt::device_type()], [`DeviceExt::device_number()`][crate::prelude::DeviceExt::device_number()],
+    /// [`DeviceExt::device_file()`][crate::prelude::DeviceExt::device_file()],
+    /// [`DeviceExt::device_file_symlinks()`][crate::prelude::DeviceExt::device_file_symlinks()].
+    ///
+    /// To navigate the device tree, use [`DeviceExt::parent()`][crate::prelude::DeviceExt::parent()] and
+    /// [`DeviceExt::parent_with_subsystem()`][crate::prelude::DeviceExt::parent_with_subsystem()].
+    ///
+    /// To access udev properties for the device, use
+    /// [`DeviceExt::property_keys()`][crate::prelude::DeviceExt::property_keys()],
+    /// [`DeviceExt::has_property()`][crate::prelude::DeviceExt::has_property()],
+    /// [`DeviceExt::property()`][crate::prelude::DeviceExt::property()],
+    /// [`DeviceExt::property_as_int()`][crate::prelude::DeviceExt::property_as_int()],
+    /// [`DeviceExt::property_as_uint64()`][crate::prelude::DeviceExt::property_as_uint64()],
+    /// [`DeviceExt::property_as_double()`][crate::prelude::DeviceExt::property_as_double()],
+    /// [`DeviceExt::property_as_boolean()`][crate::prelude::DeviceExt::property_as_boolean()] and
+    /// [`DeviceExt::property_as_strv()`][crate::prelude::DeviceExt::property_as_strv()].
+    ///
+    /// To access sysfs attributes for the device, use
+    /// [`DeviceExt::sysfs_attr_keys()`][crate::prelude::DeviceExt::sysfs_attr_keys()],
+    /// [`DeviceExt::has_sysfs_attr()`][crate::prelude::DeviceExt::has_sysfs_attr()],
+    /// [`DeviceExt::sysfs_attr()`][crate::prelude::DeviceExt::sysfs_attr()],
+    /// [`DeviceExt::sysfs_attr_as_int()`][crate::prelude::DeviceExt::sysfs_attr_as_int()],
+    /// [`DeviceExt::sysfs_attr_as_uint64()`][crate::prelude::DeviceExt::sysfs_attr_as_uint64()],
+    /// [`DeviceExt::sysfs_attr_as_double()`][crate::prelude::DeviceExt::sysfs_attr_as_double()],
+    /// [`DeviceExt::sysfs_attr_as_boolean()`][crate::prelude::DeviceExt::sysfs_attr_as_boolean()] and
+    /// [`DeviceExt::sysfs_attr_as_strv()`][crate::prelude::DeviceExt::sysfs_attr_as_strv()].
+    ///
+    /// Note that all getters on [`Device`][crate::Device] are non-reffing – returned
+    /// values are owned by the object, should not be freed and are only
+    /// valid as long as the object is alive.
+    ///
+    /// By design, [`Device`][crate::Device] will not react to changes for a device – it
+    /// only contains a snapshot of information when the [`Device`][crate::Device]
+    /// object was created. To work with changes, you typically connect to
+    /// the `signal::Client::uevent` signal on a [`Client`][crate::Client] and get a new
+    /// [`Device`][crate::Device] whenever an event happens.
+    ///
+    /// # Implements
+    ///
+    /// [`DeviceExt`][trait@crate::prelude::DeviceExt]
     #[doc(alias = "GUdevDevice")]
     pub struct Device(Object<ffi::GUdevDevice, ffi::GUdevDeviceClass>);
 
@@ -22,163 +72,508 @@ impl Device {
     pub const NONE: Option<&'static Device> = None;
 }
 
+/// Trait containing all [`struct@Device`] methods.
+///
+/// # Implementors
+///
+/// [`Device`][struct@crate::Device]
 pub trait DeviceExt: 'static {
+    /// Gets the most recent action (e.g. "add", "remove", "change", etc.) for `self`.
+    ///
+    /// # Returns
+    ///
+    /// An action string.
     #[doc(alias = "g_udev_device_get_action")]
     #[doc(alias = "get_action")]
     fn action(&self) -> Option<glib::GString>;
 
+    /// Gets the device file for `self`.
+    ///
+    /// # Returns
+    ///
+    /// The device file for `self` or [`None`] if no
+    /// device file exists.
     #[doc(alias = "g_udev_device_get_device_file")]
     #[doc(alias = "get_device_file")]
     fn device_file(&self) -> Option<glib::GString>;
 
+    /// Gets a list of symlinks (in `<literal>`/dev`</literal>`) that points to
+    /// the device file for `self`.
+    ///
+    /// # Returns
+    ///
+    /// A [`None`] terminated string array of symlinks. This array is owned by `self` and should not be freed by the caller.
     #[doc(alias = "g_udev_device_get_device_file_symlinks")]
     #[doc(alias = "get_device_file_symlinks")]
     fn device_file_symlinks(&self) -> Vec<glib::GString>;
 
+    /// Gets the device number, if any, for `self`.
+    ///
+    /// # Returns
+    ///
+    /// The device number for `self` or 0 if unknown.
     #[doc(alias = "g_udev_device_get_device_number")]
     #[doc(alias = "get_device_number")]
     fn device_number(&self) -> DeviceNumber;
 
+    /// Gets the type of the device file, if any, for `self`.
+    ///
+    /// # Returns
+    ///
+    /// The device number for `self` or [`DeviceType::None`][crate::DeviceType::None] if the device does not have a device file.
     #[doc(alias = "g_udev_device_get_device_type")]
     #[doc(alias = "get_device_type")]
     fn device_type(&self) -> DeviceType;
 
+    /// Gets the device type for `self`.
+    ///
+    /// # Returns
+    ///
+    /// The devtype for `self`.
     #[doc(alias = "g_udev_device_get_devtype")]
     #[doc(alias = "get_devtype")]
     fn devtype(&self) -> Option<glib::GString>;
 
+    /// Gets the name of the driver used for `self`.
+    ///
+    /// # Returns
+    ///
+    /// The name of the driver for `self` or [`None`] if
+    /// unknown.
     #[doc(alias = "g_udev_device_get_driver")]
     #[doc(alias = "get_driver")]
     fn driver(&self) -> Option<glib::GString>;
 
+    /// Gets whether `self` has been initialized.
+    ///
+    /// # Returns
+    ///
+    /// Whether `self` has been initialized.
     #[doc(alias = "g_udev_device_get_is_initialized")]
     #[doc(alias = "get_is_initialized")]
     fn is_initialized(&self) -> bool;
 
+    /// Gets the name of `self`, e.g. "sda3".
+    ///
+    /// # Returns
+    ///
+    /// The name of `self`.
     #[doc(alias = "g_udev_device_get_name")]
     #[doc(alias = "get_name")]
     fn name(&self) -> Option<glib::GString>;
 
+    /// Gets the number of `self`, e.g. "3" if [`name()`][Self::name()] returns "sda3".
+    ///
+    /// # Returns
+    ///
+    /// The number of `self`.
     #[doc(alias = "g_udev_device_get_number")]
     #[doc(alias = "get_number")]
     fn number(&self) -> Option<glib::GString>;
 
+    /// Gets the immediate parent of `self`, if any.
+    ///
+    /// # Returns
+    ///
+    /// A [`Device`][crate::Device] or [`None`] if
+    /// `self` has no parent. Free with `g_object_unref()`.
     #[doc(alias = "g_udev_device_get_parent")]
     #[doc(alias = "get_parent")]
     #[must_use]
     fn parent(&self) -> Option<Device>;
 
+    /// Walks up the chain of parents of `self` and returns the first
+    /// device encountered where `subsystem` and `devtype` matches, if any.
+    /// ## `subsystem`
+    /// The subsystem of the parent to get.
+    /// ## `devtype`
+    /// The devtype of the parent to get or [`None`].
+    ///
+    /// # Returns
+    ///
+    /// A [`Device`][crate::Device] or [`None`] if
+    /// `self` has no parent with `subsystem` and `devtype`. Free with
+    /// `g_object_unref()`.
     #[doc(alias = "g_udev_device_get_parent_with_subsystem")]
     #[doc(alias = "get_parent_with_subsystem")]
     #[must_use]
     fn parent_with_subsystem(&self, subsystem: &str, devtype: Option<&str>) -> Option<Device>;
 
+    /// Look up the value for `key` on `self`.
+    /// ## `key`
+    /// Name of property.
+    ///
+    /// # Returns
+    ///
+    /// The value for `key` or [`None`] if `key` doesn't
+    /// exist on `self`. Do not free this string, it is owned by `self`.
     #[doc(alias = "g_udev_device_get_property")]
     #[doc(alias = "get_property")]
     fn property(&self, key: &str) -> Option<glib::GString>;
 
+    /// Look up the value for `key` on `self` and convert it to an
+    /// boolean. This is done by doing a case-insensitive string comparison
+    /// on the string value against "1" and "true".
+    /// ## `key`
+    /// Name of property.
+    ///
+    /// # Returns
+    ///
+    /// The value for `key` or [`false`] if `key` doesn't exist or
+    /// isn't a `gboolean`.
     #[doc(alias = "g_udev_device_get_property_as_boolean")]
     #[doc(alias = "get_property_as_boolean")]
     fn property_as_boolean(&self, key: &str) -> bool;
 
+    /// Look up the value for `key` on `self` and convert it to a double
+    /// precision floating point number using `strtod()`.
+    /// ## `key`
+    /// Name of property.
+    ///
+    /// # Returns
+    ///
+    /// The value for `key` or 0.0 if `key` doesn't exist or isn't a
+    /// `gdouble`.
     #[doc(alias = "g_udev_device_get_property_as_double")]
     #[doc(alias = "get_property_as_double")]
     fn property_as_double(&self, key: &str) -> f64;
 
+    /// Look up the value for `key` on `self` and convert it to an integer
+    /// using `strtol()`.
+    /// ## `key`
+    /// Name of property.
+    ///
+    /// # Returns
+    ///
+    /// The value for `key` or 0 if `key` doesn't exist or
+    /// isn't an integer.
     #[doc(alias = "g_udev_device_get_property_as_int")]
     #[doc(alias = "get_property_as_int")]
     fn property_as_int(&self, key: &str) -> i32;
 
+    /// Look up the value for `key` on `self` and return the result of
+    /// splitting it into non-empty tokens split at white space (only space
+    /// (' '), form-feed ('\f'), newline ('\n'), carriage return ('\r'),
+    /// horizontal tab ('\t'), and vertical tab ('\v') are considered; the
+    /// locale is not taken into account).
+    /// ## `key`
+    /// Name of property.
+    ///
+    /// # Returns
+    ///
+    ///
+    /// The value of `key` on `self` split into tokens or [`None`] if `key`
+    /// doesn't exist. This array is owned by `self` and should not be
+    /// freed by the caller.
     #[doc(alias = "g_udev_device_get_property_as_strv")]
     #[doc(alias = "get_property_as_strv")]
     fn property_as_strv(&self, key: &str) -> Vec<glib::GString>;
 
+    /// Look up the value for `key` on `self` and convert it to an unsigned
+    /// 64-bit integer using `g_ascii_strtoull()`.
+    /// ## `key`
+    /// Name of property.
+    ///
+    /// # Returns
+    ///
+    /// The value for `key` or 0 if `key` doesn't exist or isn't a
+    /// `guint64`.
     #[doc(alias = "g_udev_device_get_property_as_uint64")]
     #[doc(alias = "get_property_as_uint64")]
     fn property_as_uint64(&self, key: &str) -> u64;
 
+    /// Gets all keys for properties on `self`.
+    ///
+    /// # Returns
+    ///
+    /// A [`None`] terminated string array of property keys. This array is owned by `self` and should not be freed by the caller.
     #[doc(alias = "g_udev_device_get_property_keys")]
     #[doc(alias = "get_property_keys")]
     fn property_keys(&self) -> Vec<glib::GString>;
 
+    /// Gets the most recent sequence number for `self`.
+    ///
+    /// # Returns
+    ///
+    /// A sequence number.
     #[doc(alias = "g_udev_device_get_seqnum")]
     #[doc(alias = "get_seqnum")]
     fn seqnum(&self) -> u64;
 
+    /// Gets the subsystem for `self`.
+    ///
+    /// # Returns
+    ///
+    /// The subsystem for `self`.
     #[doc(alias = "g_udev_device_get_subsystem")]
     #[doc(alias = "get_subsystem")]
     fn subsystem(&self) -> Option<glib::GString>;
 
+    /// Look up the sysfs attribute with `name` on `self`. The retrieved value
+    /// is cached in the device. Repeated calls will return the same value and
+    /// not open the attribute again, unless updated through one of the
+    /// "uncached" functions.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or [`None`] if
+    /// there is no such attribute. Do not free this string, it is owned by
+    /// `self`.
     #[doc(alias = "g_udev_device_get_sysfs_attr")]
     #[doc(alias = "get_sysfs_attr")]
     fn sysfs_attr(&self, name: &str) -> Option<glib::GString>;
 
+    /// Look up the sysfs attribute with `name` on `self` and convert it to an
+    /// boolean. This is done by doing a case-insensitive string comparison
+    /// on the string value against "1" and "true". The retrieved value is
+    /// cached in the device. Repeated calls will return the same value and
+    /// not open the attribute again, unless updated through one of the
+    /// "uncached" functions.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or [`false`] if there is no such
+    /// attribute.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_boolean")]
     #[doc(alias = "get_sysfs_attr_as_boolean")]
     fn sysfs_attr_as_boolean(&self, name: &str) -> bool;
 
+    /// Look up the sysfs attribute with `name` on `self` and convert it to an
+    /// boolean. This is done by doing a case-insensitive string comparison
+    /// on the string value against "1" and "true". This function does
+    /// blocking I/O, and updates the sysfs attributes cache.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or [`false`] if there is no such
+    /// attribute.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_boolean_uncached")]
     #[doc(alias = "get_sysfs_attr_as_boolean_uncached")]
     fn sysfs_attr_as_boolean_uncached(&self, name: &str) -> bool;
 
+    /// Look up the sysfs attribute with `name` on `self` and convert it to a double
+    /// precision floating point number using `strtod()`. The retrieved value is cached
+    /// in the device. Repeated calls will return the same value and not open the
+    /// attribute again, unless updated through one of the "uncached" functions.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or 0.0 if there is no such
+    /// attribute.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_double")]
     #[doc(alias = "get_sysfs_attr_as_double")]
     fn sysfs_attr_as_double(&self, name: &str) -> f64;
 
+    /// Look up the sysfs attribute with `name` on `self` and convert it to a double
+    /// precision floating point number using `strtod()`. This function does blocking
+    /// I/O, and updates the sysfs attributes cache.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or 0.0 if there is no such
+    /// attribute.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_double_uncached")]
     #[doc(alias = "get_sysfs_attr_as_double_uncached")]
     fn sysfs_attr_as_double_uncached(&self, name: &str) -> f64;
 
+    /// Look up the sysfs attribute with `name` on `self` and convert it to an integer
+    /// using `strtol()`. The retrieved value is cached in the device. Repeated calls
+    /// will return the same value and not open the attribute again, unless updated
+    /// through one of the "uncached" functions.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or 0 if there is no such
+    /// attribute.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_int")]
     #[doc(alias = "get_sysfs_attr_as_int")]
     fn sysfs_attr_as_int(&self, name: &str) -> i32;
 
+    /// Look up the sysfs attribute with `name` on `self` and convert it to an integer
+    /// using `strtol()`. This function does blocking I/O, and updates the sysfs
+    /// attributes cache.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or 0 if there is no such
+    /// attribute.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_int_uncached")]
     #[doc(alias = "get_sysfs_attr_as_int_uncached")]
     fn sysfs_attr_as_int_uncached(&self, name: &str) -> i32;
 
+    /// Look up the sysfs attribute with `name` on `self` and return the result of
+    /// splitting it into non-empty tokens split at white space (only space (' '),
+    /// form-feed ('\f'), newline ('\n'), carriage return ('\r'), horizontal
+    /// tab ('\t'), and vertical tab ('\v') are considered; the locale is
+    /// not taken into account).
+    ///
+    /// The retrieved value is cached in the device. Repeated calls will return
+    /// the same value and not open the attribute again, unless updated through
+    /// one of the "uncached" functions.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    ///
+    /// The value of the sysfs attribute split into tokens or [`None`] if
+    /// there is no such attribute. This array is owned by `self` and
+    /// should not be freed by the caller.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_strv")]
     #[doc(alias = "get_sysfs_attr_as_strv")]
     fn sysfs_attr_as_strv(&self, name: &str) -> Vec<glib::GString>;
 
+    /// Look up the sysfs attribute with `name` on `self` and return the result of
+    /// splitting it into non-empty tokens split at white space (only space (' '),
+    /// form-feed ('\f'), newline ('\n'), carriage return ('\r'), horizontal
+    /// tab ('\t'), and vertical tab ('\v') are considered; the locale is
+    /// not taken into account).
+    ///
+    /// This function does blocking I/O, and updates the sysfs attributes cache.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    ///
+    /// The value of the sysfs attribute split into tokens or [`None`] if
+    /// there is no such attribute. This array is owned by `self` and
+    /// should not be freed by the caller.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_strv_uncached")]
     #[doc(alias = "get_sysfs_attr_as_strv_uncached")]
     fn sysfs_attr_as_strv_uncached(&self, name: &str) -> Vec<glib::GString>;
 
+    /// Look up the sysfs attribute with `name` on `self` and convert it to an unsigned
+    /// 64-bit integer using `g_ascii_strtoull()`. The retrieved value is cached in the
+    /// device. Repeated calls will return the same value and not open the attribute
+    /// again, unless updated through one of the "uncached" functions.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or 0 if there is no such
+    /// attribute.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_uint64")]
     #[doc(alias = "get_sysfs_attr_as_uint64")]
     fn sysfs_attr_as_uint64(&self, name: &str) -> u64;
 
+    /// Look up the sysfs attribute with `name` on `self` and convert it to an unsigned
+    /// 64-bit integer using `g_ascii_strtoull()`. This function does blocking I/O, and
+    /// updates the sysfs attributes cache.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or 0 if there is no such
+    /// attribute.
     #[doc(alias = "g_udev_device_get_sysfs_attr_as_uint64_uncached")]
     #[doc(alias = "get_sysfs_attr_as_uint64_uncached")]
     fn sysfs_attr_as_uint64_uncached(&self, name: &str) -> u64;
 
+    /// Gets all keys for sysfs attributes on `self`.
+    ///
+    /// # Returns
+    ///
+    /// A [`None`] terminated string array of sysfs attribute keys. This array is owned by `self` and should not be freed by the caller.
     #[doc(alias = "g_udev_device_get_sysfs_attr_keys")]
     #[doc(alias = "get_sysfs_attr_keys")]
     fn sysfs_attr_keys(&self) -> Vec<glib::GString>;
 
+    /// Look up the sysfs attribute with `name` on `self`. This function does
+    /// blocking I/O, and updates the sysfs attributes cache.
+    /// ## `name`
+    /// Name of the sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// The value of the sysfs attribute or [`None`] if
+    /// there is no such attribute. Do not free this string, it is owned by
+    /// `self`.
     #[doc(alias = "g_udev_device_get_sysfs_attr_uncached")]
     #[doc(alias = "get_sysfs_attr_uncached")]
     fn sysfs_attr_uncached(&self, name: &str) -> Option<glib::GString>;
 
+    /// Gets the sysfs path for `self`.
+    ///
+    /// # Returns
+    ///
+    /// The sysfs path for `self`.
     #[doc(alias = "g_udev_device_get_sysfs_path")]
     #[doc(alias = "get_sysfs_path")]
     fn sysfs_path(&self) -> Option<glib::GString>;
 
+    /// Gets all tags for `self`.
+    ///
+    /// # Returns
+    ///
+    /// A [`None`] terminated string array of tags. This array is owned by `self` and should not be freed by the caller.
     #[doc(alias = "g_udev_device_get_tags")]
     #[doc(alias = "get_tags")]
     fn tags(&self) -> Vec<glib::GString>;
 
+    /// Gets number of micro-seconds since `self` was initialized.
+    ///
+    /// This only works for devices with properties in the udev
+    /// database. All other devices return 0.
+    ///
+    /// # Returns
+    ///
+    /// Number of micro-seconds since `self` was initialized or 0 if unknown.
     #[doc(alias = "g_udev_device_get_usec_since_initialized")]
     #[doc(alias = "get_usec_since_initialized")]
     fn usec_since_initialized(&self) -> u64;
 
+    /// Check if a the property with the given key exists.
+    /// ## `key`
+    /// Name of property.
+    ///
+    /// # Returns
+    ///
+    /// [`true`] only if the value for `key` exist.
     #[doc(alias = "g_udev_device_has_property")]
     fn has_property(&self, key: &str) -> bool;
 
+    /// Check if a the sysfs attribute with the given key exists. The
+    /// retrieved value is cached in the device. Repeated calls will
+    /// return the same result and not check for the presence of the
+    /// attribute again, unless updated through one of the "uncached"
+    /// functions.
+    /// ## `key`
+    /// Name of sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// [`true`] only if the value for `key` exist.
     #[doc(alias = "g_udev_device_has_sysfs_attr")]
     fn has_sysfs_attr(&self, key: &str) -> bool;
 
+    /// Check if a the sysfs attribute with the given key exists. The
+    /// retrieved value is cached in the device. Repeated calls will
+    /// return the same result and not check for the presence of the
+    /// attribute again, unless updated through one of the "uncached"
+    /// functions.
+    /// ## `key`
+    /// Name of sysfs attribute.
+    ///
+    /// # Returns
+    ///
+    /// [`true`] only if the value for `key` exist.
     #[doc(alias = "g_udev_device_has_sysfs_attr_uncached")]
     fn has_sysfs_attr_uncached(&self, key: &str) -> bool;
 }
