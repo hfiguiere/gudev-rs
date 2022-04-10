@@ -37,7 +37,7 @@
 //!     );
 //! }
 //! ```
-//! 
+//!
 pub use ffi;
 
 pub type DeviceNumber = ffi::GUdevDeviceNumber;
