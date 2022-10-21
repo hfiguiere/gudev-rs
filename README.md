@@ -6,7 +6,7 @@ events in a Gtk application.
 To generate the bindings, do:
 
 ````
-python3 generator.py --embed-docs
+python3 generator.py --embed-docs --gir-files-directories ./gir-files .
 ````
 
 Then you can build them with:
@@ -27,3 +27,4 @@ Contributors:
 
 - Bilal Elmoussaoui
 - Moritz Maxeiner
+- Rene Harder
