@@ -1,3 +1,9 @@
+0.13.0 - 2022/10/21
+
+- Bump dependencies to glib 0.16.0.
+- Added documentation to generated bindings. (Rene Harder)
+- Added some examples. (Rene Harder)
+
 0.12.0 - 2022/02/04
 
 - Export `ffi` and `prelude` (Bilal Elmoussaoui).
