@@ -7,11 +7,11 @@ bitflags = "1.0"
 libc = "0.2"
 
 [dependencies.glib]
-version = "^0.16.0"
+version = "^0.17.0"
 package = "glib-sys"
 
 [dependencies.gobject]
-version = "^0.16.0"
+version = "^0.17.0"
 package = "gobject-sys"
 
 [dev-dependencies]
@@ -19,7 +19,7 @@ shell-words = "1.0.0"
 tempfile = "3"
 
 [features]
-dox = []
+dox = ["glib/dox", "gobject/dox"]
 
 [lib]
 name = "gudev_sys"
@@ -34,10 +34,12 @@ license = "MIT"
 links = "gudev"
 name = "gudev-sys"
 repository = "https://github.com/hfiguiere/gudev-rs"
-version = "0.10.0"
+version = "0.11.0"
 edition = "2021"
+
 [package.metadata.system-deps.gudev_1_0]
 name = "gudev-1.0"
 version = "230"
+
 [package.metadata.docs.rs]
 features = ["dox"]
