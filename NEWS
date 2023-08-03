@@ -1,3 +1,8 @@
+0.14.0 - 2023/08/02
+
+- Bump dependencies to glib 0.18.0.
+- Bump sys crate to 0.12.0.
+
 0.14.0 - 2023/02/11
 
 - Bump dependencies to glib 0.17.0.
