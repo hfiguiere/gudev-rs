@@ -1,4 +1,10 @@
-0.14.0 - 2023/08/02
+0.16.0 - 2024/03/17
+
+- Bump dependencies to glib 0.19.0.
+  - Rename sys crates in gudev/sys
+- Bump sys crate to 0.13.0.
+
+0.15.0 - 2023/08/02
 
 - Bump dependencies to glib 0.18.0.
 - Bump sys crate to 0.12.0.

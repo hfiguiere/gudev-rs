@@ -8,13 +8,26 @@ license = "MIT"
 links = "gudev"
 name = "gudev-sys"
 repository = "https://github.com/hfiguiere/gudev-rs"
-version = "0.12.1"
+version = "0.13.0"
 edition = "2021"
+
+[package.metadata.system-deps.gudev_1_0]
+name = "gudev-1.0"
+version = "230"
+
+[package.metadata.docs.rs]
+features = ["dox"]
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
 
 [dependencies]
 libc = "0.2"
-glib = { version = "^0.18.0", package = "glib-sys" }
-gobject = { version = "^0.18.0", package = "gobject-sys" }
+
+[dependencies.glib-sys]
+version = "^0.19.0"
+
+[dependencies.gobject-sys]
+version = "^0.19.0"
 
 [build-dependencies]
 pkg-config = "0.3.7"
@@ -23,13 +36,6 @@ system-deps = "6"
 [dev-dependencies]
 shell-words = "1.0.0"
 tempfile = "3"
-
-[package.metadata.system-deps.gudev_1_0]
-name = "gudev-1.0"
-version = "230"
-
-[package.metadata.docs.rs]
-features = ["dox"]
 
 [features]
 dox = []

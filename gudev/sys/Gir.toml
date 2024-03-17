@@ -1,7 +1,7 @@
 [options]
 girs_directories = [
     "../../gir-files",
-    "../../gudev-gir"
+    "../../"
 ]
 work_mode = "sys"
 library = "GUdev"
