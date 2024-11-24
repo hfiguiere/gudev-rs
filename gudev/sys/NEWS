@@ -2,6 +2,10 @@
 
 - Bump to glib-sys 0.20
 
+0.13.1 - 2024/11/24
+
+- Fix a clippy warning (CI failure)
+
 0.12.1 -
 
 - Remove unused crate bitflags
