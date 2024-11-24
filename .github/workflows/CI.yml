@@ -1,7 +1,9 @@
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+      - 0.16.x
   pull_request:
 
 name: CI
