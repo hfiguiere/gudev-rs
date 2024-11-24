@@ -1,3 +1,7 @@
+0.14.0 - 2024/11/24
+
+- Bump to glib-sys 0.20
+
 0.12.1 -
 
 - Remove unused crate bitflags
