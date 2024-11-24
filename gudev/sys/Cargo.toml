@@ -8,7 +8,7 @@ license = "MIT"
 links = "gudev"
 name = "gudev-sys"
 repository = "https://github.com/hfiguiere/gudev-rs"
-version = "0.13.0"
+version = "0.14.0"
 edition = "2021"
 
 [package.metadata.system-deps.gudev_1_0]
@@ -24,14 +24,14 @@ rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
 libc = "0.2"
 
 [dependencies.glib-sys]
-version = "^0.19.0"
+version = "^0.20.0"
 
 [dependencies.gobject-sys]
-version = "^0.19.0"
+version = "^0.20.0"
 
 [build-dependencies]
 pkg-config = "0.3.7"
-system-deps = "6"
+system-deps = "7"
 
 [dev-dependencies]
 shell-words = "1.0.0"
