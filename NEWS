@@ -1,3 +1,8 @@
+0.18.0 - 2025/08/01
+
+- Bump dependencies to glib 0.21.0.
+- Bump sys crate to 0.15.0.
+
 0.17.0 - 2024/11/24
 
 - Bump dependencies to glib 0.20.0.
